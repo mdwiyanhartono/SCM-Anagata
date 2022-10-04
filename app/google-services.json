@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "548725824574",
+    "project_id": "anagata-e19b2",
+    "storage_bucket": "anagata-e19b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548725824574:android:b97a8e5400bb9659c1456f",
+        "android_client_info": {
+          "package_name": "dwiyan.com.scm_anagata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548725824574-8le7evrnr6pf0ch1lfd3hvq15j25lp11.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dwiyan.com.scm_anagata",
+            "certificate_hash": "302f9374b543bf52e73e340abc49200e50ec23de"
+          }
+        },
+        {
+          "client_id": "548725824574-l0mtcl4b7bmjk424pffk3ehbia1089eq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFANSpxa0mBRMkcDGLDSzB0btAGPbrFoE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548725824574-l0mtcl4b7bmjk424pffk3ehbia1089eq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">SCM-Anagata</string>
+    <string name="label_home">Home</string>
+    <string name="labelfeed">Chat</string>
+    <string name="labelnotif">Notif</string>
+    <string name="labelaccount">Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nama">Nama</string>
+    <string name="titik2">:</string>
+    <string name="m_dwiyan_hartono">M. Dwiyan Hartono</string>
+    <string name="user_id">User ID</string>
+    <string name="userid">dwiyan@gmail.com</string>
+    <string name="email">Email</string>
+    <string name="emailsaya">dwiyan@gmail.com</string>
+    <string name="namasaya">M. Dwiyan Hartono</string>
+
+    <string name="go_to_permissions_settings">.</string>
+    <string name="permission_dialog" />
+</resources>

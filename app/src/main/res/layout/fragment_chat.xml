@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/whitetransparant"
+    tools:context=".FragmentMainMenu.Chat">
+    <TextView
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chat"
+        android:textStyle="bold"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/black"
+        android:textSize="26sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RcComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lyBottom"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="65dp" />
+
+    <LinearLayout
+        android:id="@+id/lyBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/chat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="9"
+            android:background="@drawable/edit_text_bg"
+            android:hint="Tulis disini..."
+            android:inputType="textMultiLine"
+            android:maxLength="2000"
+            android:padding="10dp" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ButtonSendComment"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/basic2"
+            android:cropToPadding="true"
+            android:src="@drawable/send"
+            app:civ_border_color="@color/basic2"
+            app:civ_border_width="1dp" />
+
+    </LinearLayout>
+</RelativeLayout>
