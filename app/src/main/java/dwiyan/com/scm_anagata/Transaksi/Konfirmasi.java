@@ -101,6 +101,7 @@ public class Konfirmasi extends BaseActivity implements AdapterListItemTransacti
             }
         });
 
+
         btncancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

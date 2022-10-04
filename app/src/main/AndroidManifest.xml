@@ -29,6 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SCMAnagata">
         <activity
+            android:name=".Order.OrderList"
+            android:exported="false" />
+        <activity
             android:name=".Order.DetailOrder"
             android:exported="false" />
         <activity
