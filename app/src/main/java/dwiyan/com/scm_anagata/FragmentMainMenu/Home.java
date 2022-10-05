@@ -35,6 +35,7 @@ import dwiyan.com.scm_anagata.DataModel.ResponseModelCategory;
 import dwiyan.com.scm_anagata.History.History;
 import dwiyan.com.scm_anagata.ItemDetail.ItemDetailActivity;
 import dwiyan.com.scm_anagata.Order.Order;
+import dwiyan.com.scm_anagata.Order.OrderList;
 import dwiyan.com.scm_anagata.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -126,7 +127,7 @@ public class Home extends BaseFragment implements AdapterItemCategory.OnItemClic
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), Order.class);
+                Intent i = new Intent(getContext(), OrderList.class);
                 startActivity(i);
             }
         });

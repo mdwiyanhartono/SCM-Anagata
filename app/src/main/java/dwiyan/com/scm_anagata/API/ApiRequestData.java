@@ -75,6 +75,10 @@ public interface ApiRequestData {
     Call<ResponseModelCategory> GetCategory();
 
     // done
+    @GET("GetCategory_withALL")
+    Call<ResponseModelCategory> GetCategoryALL();
+
+    // done
     @Headers("Content-Type: application/json")
     @POST("GetItem")
     Call<ResponsModelItem> GetItem(@Body RequestBodyItem requestBodyItem);

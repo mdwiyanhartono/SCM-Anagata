@@ -30,7 +30,9 @@
         android:theme="@style/Theme.SCMAnagata">
         <activity
             android:name=".Order.OrderList"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar"
+            />
         <activity
             android:name=".Order.DetailOrder"
             android:exported="false" />

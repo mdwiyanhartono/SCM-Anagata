@@ -51,6 +51,7 @@
         <entry key="app/src/main/res/layout/activity_o_v_o.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_o_v_o_pay_load.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_order.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/activity_order_list.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_v_a_payment_transaksi.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_virtual_account.xml" value="0.1272644927536232" />
@@ -70,6 +71,7 @@
         <entry key="app/src/main/res/layout/list_keranjang.xml" value="0.2" />
         <entry key="app/src/main/res/layout/list_keranjang_rc.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/list_order.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/list_order_category.xml" value="0.75" />
         <entry key="app/src/main/res/layout/list_request_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/listitemcategory.xml" value="0.33" />
         <entry key="app/src/main/res/layout/notification.xml" value="0.33" />
