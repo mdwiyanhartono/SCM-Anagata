@@ -50,10 +50,10 @@ public class MainActivity extends BaseActivity {
                         fragment = new Chat();
                         getSupportFragmentManager().beginTransaction().replace(R.id.lyFragment, fragment).commit();
                         break;
-                    case R.id.notif:
-                        fragment = new Notification();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.lyFragment, fragment).commit();
-                        break;
+//                    case R.id.notif:
+//                        fragment = new Notification();
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.lyFragment, fragment).commit();
+//                        break;
                     case R.id.account:
                         fragment = new Account();
                         getSupportFragmentManager().beginTransaction().replace(R.id.lyFragment, fragment).commit();

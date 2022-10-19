@@ -39,8 +39,16 @@ public class AdapterListOrder extends RecyclerView.Adapter<HolderListOrder> {
     public void onBindViewHolder(final HolderListOrder holder, final int position) {
         final ModelOrder menu = menulist.get(position);
         holder.labelnama.setText("#"+menu.getTransactionmastercode());
-        holder.invoice.setText(menu.getInvoicenumber());
-        holder.date.setText("\u2022 masa tenggang : "+menu.getDuedate());
+        if(menu.getInvoicenumber() == null){
+            holder.invoice.setText(menu.getTransactionmastercode());
+            holder.date.setVisibility(View.GONE);
+        } else {
+            holder.invoice.setText(menu.getInvoicenumber());
+            holder.date.setText("\u2022 masa tenggang : "+menu.getDuedate());
+
+        }
+
+        holder.tgl.setText("\u2022 "+menu.getCreateddate());
         if(Integer.parseInt(menu.getIsapprove()) == 1 && menu.getIspaid().equals("f")){
             holder.Status.setText("\u2022 Pending Confirm");
         } else if (Integer.parseInt(menu.getIsapprove()) == 2 && menu.getIspaid().equals("f")){

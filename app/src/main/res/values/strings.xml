@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SCM-Anagata</string>
+    <string name="app_name">SCM-OTWC</string>
     <string name="label_home">Home</string>
     <string name="labelfeed">Chat</string>
     <string name="labelnotif">Notif</string>

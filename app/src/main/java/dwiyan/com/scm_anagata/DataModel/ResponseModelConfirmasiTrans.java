@@ -11,6 +11,7 @@ public class ResponseModelConfirmasiTrans {
     String kode;
     String message;
     String transactioncode;
+    String invoicecode;
     String transactionDate;
     String transactionid;
     String transactionDeliveryFee;
@@ -25,8 +26,25 @@ public class ResponseModelConfirmasiTrans {
     String transactionStatus;
     String transactionGrandTotal;
     String transactionStatusID;
+    String transactionIspaid;
     private List<ModelConfirmTrans> result;
 
+
+    public String getInvoicecode() {
+        return invoicecode;
+    }
+
+    public void setInvoicecode(String invoicecode) {
+        this.invoicecode = invoicecode;
+    }
+
+    public String getTransactionIspaid() {
+        return transactionIspaid;
+    }
+
+    public void setTransactionIspaid(String transactionIspaid) {
+        this.transactionIspaid = transactionIspaid;
+    }
 
     public String getTransactionStatusID() {
         return transactionStatusID;

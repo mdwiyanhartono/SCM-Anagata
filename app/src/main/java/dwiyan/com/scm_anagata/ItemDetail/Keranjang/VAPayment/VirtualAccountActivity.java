@@ -54,6 +54,7 @@ public class VirtualAccountActivity extends BaseActivity {
     }
 
     private void CreateVA(String BankCode){
+        DialogNotifFailed("Gagal","Fitur Belum Tersedia");
         final ProgressDialog pdLoading = new ProgressDialog(this);
         pdLoading.setMessage("\tLoading...");
         pdLoading.setCancelable(false);

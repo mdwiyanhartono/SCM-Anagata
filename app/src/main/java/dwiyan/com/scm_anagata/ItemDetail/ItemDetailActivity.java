@@ -48,8 +48,8 @@ public class ItemDetailActivity extends BaseActivity implements AdapterListItem.
         setContentView(R.layout.activity_item_detail);
         Intent i = getIntent();
         IdMenu = i.getStringExtra("IdMenu");
-        ProductName = i.getStringExtra("ProductName");
-        FileContent = i.getStringExtra("FileContent");
+//        ProductName = i.getStringExtra("ProductName");
+//        FileContent = i.getStringExtra("FileContent");
         setUp();
     }
 
@@ -75,16 +75,14 @@ public class ItemDetailActivity extends BaseActivity implements AdapterListItem.
         adapterListMenu = new AdapterListItem(this);
         adapterListMenu.setData(menulist);
         rcmenudetail.setAdapter(adapterListMenu);
-//        collapsing_toolbar.setTitle(ProductName);
-        if(!FileContent.isEmpty()){
-            byte[] decodedString1 = Base64.decode(FileContent, Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString1,0, decodedString1.length);
-            imagebanner.setImageBitmap(decodedByte);
-        }
-
         SetupData();
         cekKeranjang();
-
+//        collapsing_toolbar.setTitle(ProductName);
+//        if(!FileContent.isEmpty()){
+//            byte[] decodedString1 = Base64.decode(FileContent, Base64.DEFAULT);
+//            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString1,0, decodedString1.length);
+//            imagebanner.setImageBitmap(decodedByte);
+//        }
         btnkeranjang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +98,7 @@ public class ItemDetailActivity extends BaseActivity implements AdapterListItem.
 //        PdLoading();
         menulist.clear();
         API();
-        Call<ResponsModelItem> menu = api.GetItem(new RequestBodyItem(IdMenu, GlobalVar.ID));
+        Call<ResponsModelItem> menu = api.GetItem(new RequestBodyItem(IdMenu, GlobalVar.ID,""));
         menu.enqueue(new Callback<ResponsModelItem>() {
             @Override
             public void onResponse(Call<ResponsModelItem> call, Response<ResponsModelItem> response) {
@@ -169,6 +167,7 @@ public class ItemDetailActivity extends BaseActivity implements AdapterListItem.
         i.putExtra("IDMenu" , idmenu);
         i.putExtra("ActivityID" , "2");
         startActivity(i);
+//        finish();
     }
 
     @Override

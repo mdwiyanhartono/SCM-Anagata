@@ -8,13 +8,16 @@ import dwiyan.com.scm_anagata.DataModel.RequestBodyItem;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyLogin;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyUpdatePassword;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyUserId;
+import dwiyan.com.scm_anagata.DataModel.ResponseModelAllTransaksi;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelBanner;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelCategory;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelChat;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelConfirmasiTrans;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelGlobal;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelLogin;
+import dwiyan.com.scm_anagata.DataModel.ResponseModelLupaPass;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelProduct;
+import dwiyan.com.scm_anagata.DataModel.ResponseModelUserImage;
 import dwiyan.com.scm_anagata.History.Model.ResponsModelHistory;
 import dwiyan.com.scm_anagata.ItemDetail.Keranjang.Model.ReqBodyExternalID;
 import dwiyan.com.scm_anagata.ItemDetail.Keranjang.Model.ReqBodyIDTransIDUser;
@@ -33,6 +36,8 @@ import dwiyan.com.scm_anagata.ItemDetail.ResponseModel.ResponsModelItem;
 import dwiyan.com.scm_anagata.ItemDetail.ResponseModel.ResponsModelItemDetail;
 import dwiyan.com.scm_anagata.ItemDetail.ResponseModel.ResponsModelKeranjang;
 import dwiyan.com.scm_anagata.Order.Model.ResponsModelOrder;
+import dwiyan.com.scm_anagata.Payment.RequestBodyInputTransferManual;
+import dwiyan.com.scm_anagata.Payment.ResponseModelBank;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -51,8 +56,17 @@ public interface ApiRequestData {
     Call<ResponseModelLogin> Login(@Body RequestBodyLogin requestBodyLogin);
     // done
     @Headers("Content-Type: application/json")
+    @POST("Lupa-Password")
+    Call<ResponseModelLupaPass> Lupapass(@Body RequestBodyForgotPassword requestBodyForgotPassword);
+    // done
+    @Headers("Content-Type: application/json")
     @POST("LogOut")
     Call<ResponseModelGlobal> LogOut(@Body RequestBodyUserId requestBodyUserId);
+
+    // done
+    @Headers("Content-Type: application/json")
+    @POST("GetUserDetail")
+    Call<ResponseModelUserImage> GetUserImage(@Body RequestBodyUserId requestBodyUserId);
 
     // done
     @Headers("Content-Type: application/json")
@@ -73,6 +87,10 @@ public interface ApiRequestData {
     // done
     @GET("GetCategory")
     Call<ResponseModelCategory> GetCategory();
+
+    // done
+    @GET("GetBank")
+    Call<ResponseModelBank> GetBank();
 
     // done
     @GET("GetCategory_withALL")
@@ -125,6 +143,16 @@ public interface ApiRequestData {
 
     // done
     @Headers("Content-Type: application/json")
+    @POST("GetListInvoice")
+    Call<ResponsModelOrder> GetListInvoice(@Body RequestBodyUserId requestBodyUserId);
+
+    // done
+    @Headers("Content-Type: application/json")
+    @POST("InputTransferManual")
+    Call<ResponseModelGlobal> InputTransferManual(@Body RequestBodyInputTransferManual requestBodyInputTransferManual);
+
+    // done
+    @Headers("Content-Type: application/json")
     @POST("InputTransaksi")
     Call<ResponseModelGlobal> InputTransaksi(@Body RequestBodyInputTransaksi requestBodyInputTransaksi);
 
@@ -145,8 +173,18 @@ public interface ApiRequestData {
 
     // done
     @Headers("Content-Type: application/json")
+    @POST("getAllTransaction")
+    Call<ResponseModelAllTransaksi> getAllTransaction(@Body RequestBodyConfirmtrans requestBodyConfirmtrans);
+
+    // done
+    @Headers("Content-Type: application/json")
     @POST("ConfirmTrans")
     Call<ResponseModelGlobal> ConfirmTrans(@Body RequestBodyConfirmtrans requestBodyConfirmtrans);
+
+    // done
+    @Headers("Content-Type: application/json")
+    @POST("ApproveTerimaBarang")
+    Call<ResponseModelGlobal> ApproveTerimaBarang(@Body RequestBodyConfirmtrans requestBodyConfirmtrans);
 
     // done
     @Headers("Content-Type: application/json")

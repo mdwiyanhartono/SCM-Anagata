@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/basic"
     tools:context=".ItemDetail.ItemDetailActivity">
 
     <ScrollView
+        android:background="@color/whitetransparant"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ly2">
@@ -89,11 +91,11 @@
     </LinearLayout>
 
     <LinearLayout
+        android:background="@color/whitetransparant"
         android:id="@+id/ly2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
         android:orientation="vertical">
 
         <TextView

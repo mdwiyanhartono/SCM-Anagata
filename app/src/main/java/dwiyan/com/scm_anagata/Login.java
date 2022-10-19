@@ -2,18 +2,24 @@ package dwiyan.com.scm_anagata;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import dwiyan.com.scm_anagata.Base.BaseActivity;
+import dwiyan.com.scm_anagata.DataModel.RequestBodyForgotPassword;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyLogin;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelLogin;
+import dwiyan.com.scm_anagata.DataModel.ResponseModelLupaPass;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,5 +74,61 @@ public class Login extends BaseActivity {
                 }
             });
         }
+    }
+
+
+    TextInputEditText email;
+    public void Forget(View view) {
+        final Dialog d = new Dialog(this);
+        d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        d.setContentView(R.layout.alert_forgotpass);
+        email = d.findViewById(R.id.email);
+        oke = d.findViewById(R.id.ok);
+        closed = d.findViewById(R.id.cancel);
+        closed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                d.dismiss();
+            }
+        });
+
+        oke.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                d.dismiss();
+                forgotpass(email.getText().toString());
+            }
+        });
+        Window window = d.getWindow();
+        window.setGravity(Gravity.CENTER_VERTICAL);
+        window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        window.setLayout(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT);
+        d.show();
+    }
+
+    private void forgotpass(String email) {
+        PdLoading();
+        API();
+        Call<ResponseModelLupaPass> lupas = api.Lupapass(new RequestBodyForgotPassword(email));
+        lupas.enqueue(new Callback<ResponseModelLupaPass>() {
+            @Override
+            public void onResponse(Call<ResponseModelLupaPass> call, Response<ResponseModelLupaPass> response) {
+                String Status = response.body().getStatus();
+                Message = response.body().getMessage();
+                pdLoading.dismiss();
+                if(Status.equals("success")){
+                    DialogSuccessAutoHide("Lupa Password" , Message);
+                } else {
+                    DialogNotifFailed("Lupa Password" , Message);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModelLupaPass> call, Throwable t) {
+                pdLoading.dismiss();
+                DialogNotifError("error",t.getMessage().toString());
+            }
+        });
     }
 }

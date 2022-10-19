@@ -13,6 +13,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
@@ -22,6 +23,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,7 @@ import dwiyan.com.scm_anagata.DataModel.RequestBodyConfirmtrans;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyIdItem;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelConfirmasiTrans;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelGlobal;
+import dwiyan.com.scm_anagata.History.SeluruhPesanan;
 import dwiyan.com.scm_anagata.ItemDetail.Adapter.AdapterListItem;
 import dwiyan.com.scm_anagata.ItemDetail.Keranjang.Model.ResponseModelConfirmReq;
 import dwiyan.com.scm_anagata.ItemDetail.Keranjang.VAPayment.VirtualAccountActivity;
@@ -46,10 +49,10 @@ import retrofit2.Response;
 public class Konfirmasi extends BaseActivity implements AdapterListItemTransaction.OnItemClickListener {
 
     String IDtrans;
-    TextView CodeTrans, statustrans, item, deliveryfee, totalprice, alamatcompany, companyname, tanggalorder, emailcompany, phonecompany;
+    TextView CodeTrans,tglpesan, statustrans, item, deliveryfee, totalprice, alamatcompany, companyname, tanggalorder, emailcompany, phonecompany;
     RecyclerView rcitem;
     ImageView up, down;
-    CardView btnclose, btnsubmit, btncancel, btnbayar;
+    CardView btnclose, btnsubmit, btncancel, btnbayar,seluruhpesanan;
     private List<ModelConfirmTrans> assetslist = new ArrayList<>();
 
     @Override
@@ -62,16 +65,34 @@ public class Konfirmasi extends BaseActivity implements AdapterListItemTransacti
     }
 
     AdapterListItemTransaction adapterListMenu;
-    CardView btnpaymentgateway,btnpaymentmanual;
+    CardView btnpaymentgateway,btnpaymentmanual,showinvoice;
     ImageView close;
     private void SetUp() {
         PdLoading();
         CodeTrans = findViewById(R.id.CodeTrans);
+        tglpesan = findViewById(R.id.tglpesan);
+        showinvoice = findViewById(R.id.showinvoice);
         btnclose = findViewById(R.id.btnclose);
         btnsubmit = findViewById(R.id.btnsubmit);
         btncancel = findViewById(R.id.btncancel);
         btnbayar = findViewById(R.id.btnbayar);
+        seluruhpesanan = findViewById(R.id.seluruhpesanan);
 
+        seluruhpesanan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Konfirmasi.this, SeluruhPesanan.class);
+                i.putExtra("IDTrans" , IDtrans);
+                startActivity(i);
+            }
+        });
+        showinvoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("https://103.16.198.159/scm/invoice/print/"+IDtrans);
+                startActivity(new Intent(Intent.ACTION_VIEW,uri));
+            }
+        });
         btnbayar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,10 +211,12 @@ public class Konfirmasi extends BaseActivity implements AdapterListItemTransacti
                 Kode = response.body().getKode();
                 Message = response.body().getMessage();
                 assetslist = response.body().getResult();
+                tglpesan.setText(response.body().getTransactionDate());
                 adapterListMenu.setData(assetslist);
                 CodeTrans.setText(response.body().getTransactioncode());
                 statustrans.setText(response.body().getTransactionStatus());
                 item.setText(response.body().getTransactionQnty() + " Items");
+
                 df = (DecimalFormat) nf;
                 {
                     df.applyPattern(pattern);
@@ -209,11 +232,17 @@ public class Konfirmasi extends BaseActivity implements AdapterListItemTransacti
                 emailcompany.setText(response.body().getCompanyemail());
                 phonecompany.setText(response.body().getCompanyphone());
                 statustrans.setTextColor(R.color.yellow);
-
+                if(response.body().getInvoicecode() == null ){
+                    showinvoice.setVisibility(View.GONE);
+                } else {
+                    showinvoice.setVisibility(View.VISIBLE);
+                }
                 if (Integer.parseInt(response.body().getTransactionStatusID()) == 2 && Integer.parseInt(response.body().getTransactionStatusID()) == 3) {
                     btnclose.setVisibility(View.VISIBLE);
                 } else if (Integer.parseInt(response.body().getTransactionStatusID()) == 1) {
                     btnclose.setVisibility(View.GONE);
+
+                    showinvoice.setVisibility(View.GONE);
                     btnsubmit.setVisibility(View.VISIBLE);
                     btncancel.setVisibility(View.VISIBLE);
                 } else {

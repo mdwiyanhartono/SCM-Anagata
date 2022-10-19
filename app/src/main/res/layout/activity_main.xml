@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/basic"
     tools:context=".MainActivity">
 <ImageView
     android:layout_width="match_parent"
     android:layout_height="350dp"
-    android:layout_marginTop="-40dp"
-    android:layout_marginStart="-200dp"
-    android:src="@drawable/splash" />
+    android:layout_marginTop="-50dp"
+    android:src="@drawable/scmotwc" />
     <FrameLayout
         android:id="@+id/lyFragment"
         android:layout_width="match_parent"
@@ -24,12 +24,13 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        android:id="@+id/bottomAppbar"-->
 <!--        >-->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:menu="@menu/bottom_menu"
-            android:id="@+id/bottomnav"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomnav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/basic"
+        app:menu="@menu/bottom_menu" />
 <!--    </com.google.android.material.bottomappbar.BottomAppBar>-->
 
 </RelativeLayout>

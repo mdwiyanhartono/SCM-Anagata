@@ -9,11 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,12 +45,15 @@ import retrofit2.Response;
 
 public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem.OnItemClickListener {
 
-    RecyclerView rc1,rcmenudetail;
+    RecyclerView rc1, rcmenudetail;
     AdapterCategory adapterItemCategory;
     AdapterListItem adapterListMenu;
     CardView btnkeranjang;
-    TextView labelbtnKeranjang,count;
+    TextView labelbtnKeranjang, count;
+    EditText cari;
+    String sCari = null;
     LinearLayout ly2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +63,11 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
         btnkeranjang = findViewById(R.id.btnkeranjang);
         labelbtnKeranjang = findViewById(R.id.labelbtnKeranjang);
         count = findViewById(R.id.count);
+        cari = findViewById(R.id.cari);
         ly2 = findViewById(R.id.ly2);
         rc1.setItemAnimator(new DefaultItemAnimator());
         rc1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapterItemCategory =  new AdapterCategory(this);
+        adapterItemCategory = new AdapterCategory(this);
 
         rcmenudetail.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rcmenudetail.setItemAnimator(new DefaultItemAnimator());
@@ -78,6 +86,30 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
 //                finish();
             }
         });
+
+        cari.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if (s.length() != 0) {
+                    sCari = cari.getText().toString();
+                    GetMenu(Categid);
+                } else {
+
+                }
+            }
+        });
+
     }
 
     private void cekKeranjang() {
@@ -115,6 +147,7 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
     }
 
     private List<ModelItemCategory> ItemCategoryList = new ArrayList<>();
+
     private void SetUpCategory() {
         ItemCategoryList.clear();
         API();
@@ -125,7 +158,7 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
                 pdLoading.dismiss();
                 Kode = response.body().getKode();
                 Message = response.body().getMessage();
-                if(Integer.parseInt(Kode) == 1){
+                if (Integer.parseInt(Kode) == 1) {
                     ItemCategoryList = response.body().getResult();
                     adapterItemCategory.setData(ItemCategoryList);
                     rc1.setAdapter(adapterItemCategory);
@@ -142,19 +175,20 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
     private List<ModelItem> menulist = new ArrayList<>();
 
     String Categid;
+
     @Override
     public void callback(String categid) {
         Categid = categid;
+        cari.setText("");
+        sCari = null;
         GetMenu(Categid);
         cekKeranjang();
     }
 
     private void GetMenu(String categid) {
-        PdLoading();
-//        Toast.makeText(this, String.valueOf(position)+" Position", Toast.LENGTH_SHORT).show();
         menulist.clear();
         API();
-        Call<ResponsModelItem> menu = api.GetItem(new RequestBodyItem(categid, GlobalVar.ID));
+        Call<ResponsModelItem> menu = api.GetItem(new RequestBodyItem(categid, GlobalVar.ID, sCari));
         menu.enqueue(new Callback<ResponsModelItem>() {
             @Override
             public void onResponse(Call<ResponsModelItem> call, Response<ResponsModelItem> response) {
@@ -179,8 +213,8 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
     @Override
     public void onItemClick(String idmenu) {
         Intent i = new Intent(this, ItemDetail.class);
-        i.putExtra("IDMenu" , idmenu);
-        i.putExtra("ActivityID" , "3");
+        i.putExtra("IDMenu", idmenu);
+        i.putExtra("ActivityID", "3");
         startActivity(i);
         finish();
     }

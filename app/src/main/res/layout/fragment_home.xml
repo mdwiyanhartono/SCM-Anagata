@@ -27,7 +27,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/basic3"
+            app:cardBackgroundColor="@color/basic5"
             app:cardElevation="10dp"
             android:layout_margin="10dp"
             app:cardCornerRadius="20dp">
@@ -41,9 +41,10 @@
                     android:layout_weight="4"
                     android:layout_margin="15dp">
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imageprofile"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:src="@drawable/dwiyanfto"/>
+                        android:src="@drawable/nodata"/>
                 </LinearLayout>
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -62,12 +63,13 @@
                             android:layout_height="wrap_content"
                             android:text="@string/namasaya"
                             android:textSize="16sp"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textStyle="bold"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Requester"
+                            android:textColor="@color/white"
                             android:textSize="12sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -81,13 +83,14 @@
                             android:layout_height="wrap_content"
                             android:text="User ID"
                             android:textSize="13sp"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textStyle="bold"/>
                         <TextView
                             android:id="@+id/username"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="012-0021-22123"
+                            android:textColor="@color/white"
                             android:textSize="10sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -95,7 +98,7 @@
                 </RelativeLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
+<!--        Menu Main Bar-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -167,6 +170,7 @@
                 android:orientation="vertical"
                 >
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/terimabarang"
                     app:cardElevation="5dp"
                     android:layout_width="match_parent"
                     app:cardCornerRadius="20dp"
@@ -184,17 +188,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="Tracking"
+                    android:text="Gods Receipt"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:orientation="vertical"
                 >
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/payment"
                     app:cardElevation="5dp"
                     android:layout_width="match_parent"
                     app:cardCornerRadius="20dp"
@@ -285,7 +291,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc1"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:layout_marginStart="5dp" />
     </LinearLayout>

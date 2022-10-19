@@ -2,18 +2,17 @@ package dwiyan.com.scm_anagata.DataModel;
 
 public class RequestBodyForgotPassword {
 
-    private String Email;
+    private String email;
 
     public RequestBodyForgotPassword(String email) {
-
-        Email = email;
+        this.email = email;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 }

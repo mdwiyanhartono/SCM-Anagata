@@ -5,15 +5,17 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="whitetransparant">#E2FFFFFF</color>
+    <color name="whitetransparant">#BFFFFFFF</color>
+    <color name="browntransparant">#B66629</color>
     <color name="gray">#D0D5DB</color>
     <color name="gray_300">#E4E4FF</color>
     <color name="gray_500">#BEBFBF</color>
-    <color name="basic">#A1CCEC</color>
-    <color name="basic2">#2D66D9</color>
+    <color name="basic">#FFC423</color>
+    <color name="basic2">#541800</color>
     <color name="yellow">#FFEA00</color>
-    <color name="basic3">#87D8F7</color>
-    <color name="basic4">#BAE2FF</color>
+    <color name="basic3">#8A3C01</color>
+    <color name="basic5">#B15E20</color>
+    <color name="basic4">#7C2400</color>
 
 
     <color name="blue_basic_button">#03A9F4</color>

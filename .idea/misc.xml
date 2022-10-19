@@ -37,10 +37,12 @@
         <entry key="app/src/main/res/drawable/support.xml" value="0.103" />
         <entry key="app/src/main/res/layout/activity_confirm_request.xml" value="0.14" />
         <entry key="app/src/main/res/layout/activity_detail_order.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_detail_transaksi_pay_single.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_e_wallet.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_e_wallet2.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_ewallet.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_history.xml" value="0.1272644927536232" />
+        <entry key="app/src/main/res/layout/activity_invoice_single.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_item_detail.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_item_detail_1.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_keranjang.xml" value="0.2" />
@@ -51,31 +53,41 @@
         <entry key="app/src/main/res/layout/activity_o_v_o.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_o_v_o_pay_load.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_order.xml" value="0.16" />
-        <entry key="app/src/main/res/layout/activity_order_list.xml" value="0.1272644927536232" />
+        <entry key="app/src/main/res/layout/activity_order_list.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_seluruh_pesanan.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1272644927536232" />
+        <entry key="app/src/main/res/layout/activity_transfer_manual_sigle.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_update_password.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_v_a_payment_transaksi.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_virtual_account.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/alert.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/alert_auto_hide.xml" value="0.1" />
         <entry key="app/src/main/res/layout/alert_failed.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/alert_forgotpass.xml" value="0.2" />
         <entry key="app/src/main/res/layout/alert_question.xml" value="0.1" />
         <entry key="app/src/main/res/layout/chat_item_left.xml" value="0.5" />
         <entry key="app/src/main/res/layout/chat_item_right.xml" value="0.5" />
         <entry key="app/src/main/res/layout/confirmasi_pembayaran.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_account.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_account.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="app/src/main/res/layout/image_slider_layout_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/list_history.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/list_invoice.xml" value="0.4897196261682243" />
         <entry key="app/src/main/res/layout/list_keranjang.xml" value="0.2" />
         <entry key="app/src/main/res/layout/list_keranjang_rc.xml" value="0.1272644927536232" />
-        <entry key="app/src/main/res/layout/list_order.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/list_order.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_order_category.xml" value="0.75" />
         <entry key="app/src/main/res/layout/list_request_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/listitemcategory.xml" value="0.33" />
         <entry key="app/src/main/res/layout/notification.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/opsi_pembayaran.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/spinner_bank.xml" value="0.1272644927536232" />
+        <entry key="app/src/main/res/layout/view_scan.xml" value="0.22" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1765" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1765" />
       </map>
     </option>
   </component>

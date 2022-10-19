@@ -1,68 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview"
-        android:layout_width="wrap_content"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/basic"
+    app:cardCornerRadius="40dp"
+    android:id="@+id/cardview"
+    app:cardElevation="5dp"
+    android:layout_margin="5dp">
+    <LinearLayout
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="15dp"
-        app:cardUseCompatPadding="true"
-        app:cardCornerRadius="10dp">
+        android:orientation="horizontal">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/basic2"
+            android:id="@+id/imagepromo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/nodata"/>
         <LinearLayout
-            android:id="@+id/lv"
+            android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_gravity="center"
-                android:id="@+id/imagepromo"
-                android:scaleType="centerInside"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginEnd="12dp"
+                android:maxLength="50"
+                android:lines="1"
+                android:ellipsize="end"
+                android:id="@+id/label"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                app:srcCompat="@drawable/nodata"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical">
-                <TextView
-                    android:maxLength="50"
-                    android:lines="1"
-                    android:ellipsize="end"
-                    android:layout_marginBottom="5dp"
-                    android:id="@+id/label"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Laptop A"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif-black"
-                    android:textSize="16sp"/>
-<!--                android:maxLength="30"-->
-                <TextView
-                    android:id="@+id/desc"
-
-                    android:textColor="@color/gray_500"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="normal"
-                    android:text="Description"
-                    android:textSize="12sp"
-                    />
-            </LinearLayout>
-
-
+                android:layout_height="wrap_content"
+                android:text="Laptop A"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-black"
+                android:textSize="21sp"/>
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
 
-
-</LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -226,8 +226,7 @@ public class ItemDetail extends BaseActivity {
             } else if (Integer.valueOf(ActivityID) == 2) {
                 finish();
             } else {
-                Intent i = new Intent(ItemDetail.this, ItemDetailActivity.class);
-                i.putExtra("CompanyID", CompanyID);
+                Intent i = new Intent(ItemDetail.this, OrderList.class);
                 startActivity(i);
                 finish();
             }

@@ -76,17 +76,17 @@ public class AdapterCategory extends RecyclerView.Adapter<HolderCategory> {
         if(select){
             if(position == 0){
                 updateRC.callback(da.getCategoryid());
-                holder.cardview.setCardBackgroundColor(Color.parseColor("#87D8F7"));
+                holder.cardview.setCardBackgroundColor(Color.parseColor("#7C2400"));
 //                holder.cardview.setCardBackgroundColor(getColor(activity,R.color.basic3));
             }
             select = false;
         } else {
             if(row_index == position){
 //                holder.cardview.setCardBackgroundColor(getColor(activity,R.color.basic3));
-            holder.cardview.setCardBackgroundColor(Color.parseColor("#87D8F7"));
+            holder.cardview.setCardBackgroundColor(Color.parseColor("#7C2400"));
             } else {
 //                holder.cardview.setCardBackgroundColor(getColor(activity,R.color.basic));
-            holder.cardview.setCardBackgroundColor(Color.parseColor("#A1CCEC"));
+            holder.cardview.setCardBackgroundColor(Color.parseColor("#FFC423"));
             }
         }
 
