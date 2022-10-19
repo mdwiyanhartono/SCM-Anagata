@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import dwiyan.com.scm_anagata.Base.BaseFragment;
 import dwiyan.com.scm_anagata.Base.GlobalVar;
@@ -74,13 +75,19 @@ public class Account extends BaseFragment {
 
     Button btnlogout;
     ImageView imageprofile;
+    TextView nama,email;
     LinearLayout lyubahkatasandi;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_account, container, false);
+        getuser();
         btnlogout = v.findViewById(R.id.logout);
+        nama = v.findViewById(R.id.nama);
+        email = v.findViewById(R.id.username);
+        nama.setText(GlobalVar.NAMA);
+        email.setText(GlobalVar.EMAIL);
         lyubahkatasandi = v.findViewById(R.id.lyubahkatasandi);
         lyubahkatasandi.setOnClickListener(new View.OnClickListener() {
             @Override

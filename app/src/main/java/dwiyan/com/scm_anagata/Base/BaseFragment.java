@@ -72,8 +72,8 @@ public class BaseFragment extends Fragment {
             GlobalVar.NAMA = c.getString(0);
             GlobalVar.EMAIL = c.getString(2);
             GlobalVar.ID = c.getString(3);
-            GlobalVar.NOHP = c.getString(4);
-            GlobalVar.Level = c.getString(5);
+//            GlobalVar.NOHP = c.getString(4);
+//            GlobalVar.Level = c.getString(5);
         }
         db.close();
     }

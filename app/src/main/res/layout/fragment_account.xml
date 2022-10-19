@@ -57,7 +57,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:text="@string/nama"
                         android:textColor="@color/black" />
 
@@ -69,6 +69,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/nama"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="10"
@@ -118,7 +119,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:text="@string/email"
                         android:textColor="@color/black" />
 
@@ -130,6 +131,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/username"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="10"

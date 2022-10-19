@@ -15,13 +15,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.zxing.Result;
+
+import javax.xml.transform.Result;
 
 import dwiyan.com.scm_anagata.Base.BaseActivity;
 import dwiyan.com.scm_anagata.Base.GlobalVar;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyConfirmtrans;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelGlobal;
 import dwiyan.com.scm_anagata.R;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,8 +42,22 @@ public class TerimaBarangScanQR extends BaseActivity implements ZXingScannerView
     TextView transcode;
     Button closed,oke;
     ImageView close;
+
     @Override
-    public void handleResult(Result result) {
+    public void onResume() {
+        super.onResume();
+        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+        mScannerView.startCamera();          // Start camera on resume
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mScannerView.stopCamera();           // Stop camera on pause
+    }
+
+    @Override
+    public void handleResult(com.google.zxing.Result result) {
         Toast.makeText(this, result.getText().toString(), Toast.LENGTH_SHORT).show();
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
@@ -100,20 +116,5 @@ public class TerimaBarangScanQR extends BaseActivity implements ZXingScannerView
         } else {
             DialogNotifFailed("QR" , "Format QR tidak diketahui");
         }
-
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
-        mScannerView.startCamera();          // Start camera on resume
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mScannerView.stopCamera();           // Stop camera on pause
-    }
-
 }

@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1,
-      "versionName": "1.0",
-      "outputFile": "SCM-OTWC-1.0.apk"
+      "versionCode": 2,
+      "versionName": "1.2",
+      "outputFile": "SCM-OTWC-1.2.apk"
     }
   ],
   "elementType": "File"

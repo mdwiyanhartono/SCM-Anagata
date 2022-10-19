@@ -53,7 +53,7 @@ public class Login extends BaseActivity {
                     Message = response.body().getMessage();
                     if(Integer.parseInt(Kode) == 1){
                         DataBase();
-                        Toast.makeText(Login.this, "Data:" + response.body().getUserID()+" nama: "+ response.body().getNama()+" Email : "+ response.body().getEmail(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Login.this, "Data:" + response.body().getUserID()+" nama: "+ response.body().getNama()+" Email : "+ response.body().getEmail(), Toast.LENGTH_SHORT).show();
                         db.openDB();
                         long adduser = db.adduser(response.body().getNama().toString(),response.body().getEmail().toString(),response.body().getUserID().toString());
                         db.close();
