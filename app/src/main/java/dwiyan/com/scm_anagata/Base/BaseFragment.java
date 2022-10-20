@@ -265,6 +265,7 @@ public class BaseFragment extends Fragment {
         //SELECT
         Long a = db2.Deleteuser();
         db2.close();
+        GlobalVar.ID = "0";
         Intent i = new Intent(getActivity(), SplashScreen.class);
         startActivity(i);
         getActivity().finish();

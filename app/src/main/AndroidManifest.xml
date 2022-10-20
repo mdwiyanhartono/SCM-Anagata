@@ -20,14 +20,16 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" tools:node="remove"/>
 
+
+<!--    android:hardwareAccelerated="false"-->
     <application
         android:allowBackup="true"
         android:icon="@drawable/scmotwc"
         android:label="@string/app_name"
         android:roundIcon="@drawable/scmotwc"
         android:supportsRtl="true"
-        android:hardwareAccelerated="false"
         android:largeHeap="true"
         android:theme="@style/Theme.SCMAnagata">
         <activity

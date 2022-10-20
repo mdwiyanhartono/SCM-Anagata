@@ -8,6 +8,7 @@ import dwiyan.com.scm_anagata.DataModel.RequestBodyItem;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyLogin;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyUpdatePassword;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyUserId;
+import dwiyan.com.scm_anagata.DataModel.RequestBodyUserIdToken;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelAllTransaksi;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelBanner;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelCategory;
@@ -67,6 +68,11 @@ public interface ApiRequestData {
     @Headers("Content-Type: application/json")
     @POST("GetUserDetail")
     Call<ResponseModelUserImage> GetUserImage(@Body RequestBodyUserId requestBodyUserId);
+
+    // done
+    @Headers("Content-Type: application/json")
+    @POST("SetTokenDevice")
+    Call<ResponseModelGlobal> SetTokenDevice (@Body RequestBodyUserIdToken requestBodyUserIdToken);
 
     // done
     @Headers("Content-Type: application/json")

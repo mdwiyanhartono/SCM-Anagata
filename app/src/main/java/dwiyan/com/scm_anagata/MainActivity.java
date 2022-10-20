@@ -26,7 +26,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottomnav);
 
-//        GetTokenFCM();
+        GetTokenFCM();
         SetTopic();
         getSupportFragmentManager().beginTransaction().replace(R.id.lyFragment, new Home()).commit();
         bottomNavigationView.setSelectedItemId(R.id.home);

@@ -50,6 +50,7 @@ import dwiyan.com.scm_anagata.API.ApiRequestData;
 import dwiyan.com.scm_anagata.API.Retroserver;
 import dwiyan.com.scm_anagata.DataBase.DBAdapter2;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyUserId;
+import dwiyan.com.scm_anagata.DataModel.RequestBodyUserIdToken;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelGlobal;
 import dwiyan.com.scm_anagata.Login;
 import dwiyan.com.scm_anagata.MainActivity;
@@ -75,7 +76,7 @@ public class BaseActivity extends AppCompatActivity {
     public ApiRequestData api;
 
     private static final String TAG = "Test-SCM";
-    private static final String TOPIC = "SCM-Anagata";
+    private static final String TOPIC = "Test-SCM-Anagata";
     public DecimalFormat df;
     public String pattern = "#,###,###,###,###.00", price = "";
     public NumberFormat nf = NumberFormat.getInstance(Locale.US);
@@ -105,6 +106,25 @@ public class BaseActivity extends AppCompatActivity {
 
                         // Get new FCM registration token
                         String token = task.getResult();
+                        API();
+                        Call<ResponseModelGlobal> setToken = api.SetTokenDevice(new RequestBodyUserIdToken(GlobalVar.ID, token) );
+                        setToken.enqueue(new Callback<ResponseModelGlobal>() {
+                            @Override
+                            public void onResponse(Call<ResponseModelGlobal> call, Response<ResponseModelGlobal> response) {
+                                Kode = response.body().getKode();
+                                Message = response.body().getMessage();
+                                if(Integer.parseInt(Kode) > 0){
+                                    Log.d(TAG, "SetToket Gagal " + token);
+                                } else {
+                                    Log.d(TAG, "SetToket Berhasil : " + Message);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseModelGlobal> call, Throwable t) {
+                                Log.d(TAG, "SetToket Gagal " + t.getMessage());
+                            }
+                        });
 
                         // Log and toast
 //                        String msg = getString(R.string.msg_token_fmt, token);
