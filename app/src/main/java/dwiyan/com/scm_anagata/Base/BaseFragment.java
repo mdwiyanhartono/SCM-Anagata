@@ -269,5 +269,7 @@ public class BaseFragment extends Fragment {
         Intent i = new Intent(getActivity(), SplashScreen.class);
         startActivity(i);
         getActivity().finish();
+
+        GlobalVar globalVar = new GlobalVar();
     }
 }
