@@ -7,7 +7,8 @@
     android:background="@color/basic"
     tools:context=".ItemDetail.ItemDetailActivity">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsc"
         android:background="@color/whitetransparant"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,7 +50,7 @@
                 />
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
     <LinearLayout
         android:id="@+id/lyHeader"
         android:layout_width="match_parent"

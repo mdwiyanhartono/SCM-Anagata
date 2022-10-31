@@ -1,7 +1,11 @@
 package dwiyan.com.scm_anagata.Order;
 
+import static dwiyan.com.scm_anagata.PaginationScrollListener.PAGE_START;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +34,7 @@ import dwiyan.com.scm_anagata.Base.BaseActivity;
 import dwiyan.com.scm_anagata.Base.GlobalVar;
 import dwiyan.com.scm_anagata.DataModel.ModelItemCategory;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyItem;
+import dwiyan.com.scm_anagata.DataModel.RequestBodyItemPagination;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyUserId;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelCategory;
 import dwiyan.com.scm_anagata.ItemDetail.Adapter.AdapterListItem;
@@ -38,6 +45,8 @@ import dwiyan.com.scm_anagata.ItemDetail.Model.ModelItem;
 import dwiyan.com.scm_anagata.ItemDetail.ResponseModel.ResponsModelItem;
 import dwiyan.com.scm_anagata.ItemDetail.ResponseModel.ResponsModelKeranjang;
 import dwiyan.com.scm_anagata.Order.Adapter.AdapterCategory;
+import dwiyan.com.scm_anagata.Order.Model.ModelItemPagination;
+import dwiyan.com.scm_anagata.PaginationScrollListener;
 import dwiyan.com.scm_anagata.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,24 +62,66 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
     EditText cari;
     String sCari = null;
     LinearLayout ly2;
+    NestedScrollView nsc;
+    private boolean isLoading = false;
+    int itemCount = 0;
+    private boolean isLastPage = false;
+    private int currentPage = PAGE_START;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list);
         rc1 = findViewById(R.id.rc1);
+        nsc = findViewById(R.id.nsc);
         rcmenudetail = findViewById(R.id.rc2);
         btnkeranjang = findViewById(R.id.btnkeranjang);
         labelbtnKeranjang = findViewById(R.id.labelbtnKeranjang);
         count = findViewById(R.id.count);
         cari = findViewById(R.id.cari);
         ly2 = findViewById(R.id.ly2);
+        // use a linear layout manager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rc1.setItemAnimator(new DefaultItemAnimator());
         rc1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         adapterItemCategory = new AdapterCategory(this);
 
-        rcmenudetail.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        rcmenudetail.setLayoutManager(layoutManager);
         rcmenudetail.setItemAnimator(new DefaultItemAnimator());
+        nsc.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(@NonNull NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                // on scroll change we are checking when users scroll as bottom.
+                if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                    // in this method we are incrementing page number,
+                    // making progress bar visible and calling get data method.
+                    currentPage++;
+                    PdLoading();
+                    GetMenu(Categid);
+                    Toast.makeText(OrderList.this, "Load More Page" + currentPage, Toast.LENGTH_SHORT).show();
+//                    loadingPB.setVisibility(View.VISIBLE);
+//                    getDataFromAPI(page, limit);
+                }
+            }
+        });
+//        rcmenudetail.addOnScrollListener(new PaginationScrollListener(layoutManager) {
+//            @Override
+//            protected void loadMoreItems() {
+//                currentPage++;
+////                GetMenu(Categid);
+//                Toast.makeText(OrderList.this, "Load More Page" + currentPage , Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public boolean isLastPage() {
+//                return isLastPage;
+//            }
+//
+//            @Override
+//            public boolean isLoading() {
+//                return isLoading;
+//            }
+//        });
         adapterListMenu = new AdapterListItem(this);
         adapterListMenu.setData(menulist);
         rcmenudetail.setAdapter(adapterListMenu);
@@ -103,6 +154,8 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
                                       int before, int count) {
                 if (s.length() != 0) {
                     sCari = cari.getText().toString();
+                    menulist.clear();
+                    currentPage = PAGE_START;
                     GetMenu(Categid);
                 } else {
 
@@ -172,7 +225,7 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
         });
     }
 
-    private List<ModelItem> menulist = new ArrayList<>();
+    private ArrayList<ModelItemPagination> menulist = new ArrayList<>();
 
     String Categid;
 
@@ -181,22 +234,47 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
         Categid = categid;
         cari.setText("");
         sCari = null;
+        menulist.clear();
+        itemCount = 0;
+        currentPage = PAGE_START;
+        PdLoading();
         GetMenu(Categid);
         cekKeranjang();
     }
 
     private void GetMenu(String categid) {
-        menulist.clear();
+//        menulist.clear();
+//        PdLoading();
         API();
-        Call<ResponsModelItem> menu = api.GetItem(new RequestBodyItem(categid, GlobalVar.ID, sCari));
+        Call<ResponsModelItem> menu = api.GetItemPagination(new RequestBodyItemPagination(categid, GlobalVar.ID, sCari, String.valueOf(currentPage), String.valueOf(currentPage)));
         menu.enqueue(new Callback<ResponsModelItem>() {
             @Override
             public void onResponse(Call<ResponsModelItem> call, Response<ResponsModelItem> response) {
                 pdLoading.dismiss();
                 Kode = response.body().getKode();
                 Message = response.body().getMessage();
-                menulist = response.body().getResult();
+                for (int i = 0; i < response.body().getResult().size(); i++) {
+                    menulist.add(new ModelItemPagination(
+                            response.body().getResult().get(i).getItemid(),
+                            response.body().getResult().get(i).getCountChart(),
+                            response.body().getResult().get(i).getItemname(),
+                            response.body().getResult().get(i).getItemuom(),
+                            response.body().getResult().get(i).getItemcode(),
+                            response.body().getResult().get(i).getItemdesc(),
+                            response.body().getResult().get(i).getItemprice(),
+                            response.body().getResult().get(i).getItempriceview(),
+                            response.body().getResult().get(i).getImageFileContent(),
+                            response.body().getResult().get(i).getImageFileContent()
+                    ));
+
+                    itemCount++;
+                    Toast.makeText(OrderList.this, "Count " + itemCount, Toast.LENGTH_SHORT).show();
+                }
+//                menulist = response.body().getResult();
                 adapterListMenu.setData(menulist);
+                rcmenudetail.setAdapter(adapterListMenu);
+//                itemCount = menulist.size() + itemCount;
+//                Toast.makeText(OrderList.this, "Count " + itemCount, Toast.LENGTH_SHORT).show();
 //                rcmenudetail.setAdapter(adapterListMenu);
             }
 

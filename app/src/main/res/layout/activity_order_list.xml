@@ -6,19 +6,20 @@
     android:layout_height="match_parent"
     android:background="@color/basic"
     tools:context=".Order.OrderList">
-<!--    <ImageView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:src="@drawable/scmotwc"-->
-<!--        android:layout_marginTop="-50dp"/>-->
+    <!--    <ImageView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:src="@drawable/scmotwc"-->
+    <!--        android:layout_marginTop="-50dp"/>-->
+
 
     <LinearLayout
-        android:background="@color/whitetransparant"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/ly2"
-        android:layout_marginTop="-20dp"
         android:layout_below="@+id/lyHeader"
+        android:layout_marginTop="-20dp"
+        android:background="@color/whitetransparant"
         android:orientation="vertical">
 
         <TextView
@@ -57,18 +58,25 @@
                 android:id="@+id/cari"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:background="@drawable/edit_text_bg"
-                android:padding="7dp"
                 android:drawableEnd="@drawable/search"
                 android:hint="Search..."
-                android:layout_marginStart="20dp"/>
+                android:padding="7dp" />
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc2"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsc"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/lyHeader"
@@ -111,11 +119,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:background="@color/whitetransparant"
         android:id="@+id/ly2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@color/whitetransparant"
         android:orientation="vertical">
 
         <TextView

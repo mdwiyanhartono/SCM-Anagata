@@ -71,6 +71,7 @@ public class Keranjang extends BaseActivity implements AdapterKeranjang.OnItemCl
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btnsubmit.setEnabled(false);
                 SubmitKeranjang();
             }
         });
@@ -87,6 +88,7 @@ public class Keranjang extends BaseActivity implements AdapterKeranjang.OnItemCl
     }
 
     private void SubmitKeranjang() {
+
         SendData();
     }
 
@@ -105,12 +107,14 @@ public class Keranjang extends BaseActivity implements AdapterKeranjang.OnItemCl
                 } else {
                     DialogNotifFailed("Gagal",Message);
                 }
+                btnsubmit.setEnabled(true);
             }
 
             @Override
             public void onFailure(Call<ResponseModelGlobal> call, Throwable t) {
                 pdLoading.dismiss();
                 DialogNotifError("Error" , t.getMessage());
+                btnsubmit.setEnabled(true);
             }
         });
 

@@ -5,6 +5,7 @@ import dwiyan.com.scm_anagata.DataModel.RequestBodyConfirmtrans;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyForgotPassword;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyIdItem;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyItem;
+import dwiyan.com.scm_anagata.DataModel.RequestBodyItemPagination;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyLogin;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyUpdatePassword;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyUserId;
@@ -106,6 +107,11 @@ public interface ApiRequestData {
     @Headers("Content-Type: application/json")
     @POST("GetItem")
     Call<ResponsModelItem> GetItem(@Body RequestBodyItem requestBodyItem);
+
+    // done
+    @Headers("Content-Type: application/json")
+    @POST("GetItemPagination")
+    Call<ResponsModelItem> GetItemPagination(@Body RequestBodyItemPagination requestBodyItemPagination);
 
     // done
     @Headers("Content-Type: application/json")

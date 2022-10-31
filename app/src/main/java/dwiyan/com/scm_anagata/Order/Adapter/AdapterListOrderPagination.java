@@ -1,6 +1,6 @@
-package dwiyan.com.scm_anagata.ItemDetail.Adapter;
+package dwiyan.com.scm_anagata.Order.Adapter;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -12,35 +12,39 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import dwiyan.com.scm_anagata.Holder.OnItemClickListener;
+import dwiyan.com.scm_anagata.ItemDetail.Adapter.AdapterListItem;
 import dwiyan.com.scm_anagata.ItemDetail.Holder.HolderItemDetail;
 import dwiyan.com.scm_anagata.ItemDetail.Model.ModelItem;
-import dwiyan.com.scm_anagata.Order.Model.ModelItemPagination;
 import dwiyan.com.scm_anagata.R;
 
+public class AdapterListOrderPagination extends RecyclerView.Adapter<HolderItemDetail> {
 
-public class AdapterListItem extends RecyclerView.Adapter<HolderItemDetail> {
-
-    private ArrayList<ModelItemPagination> menulist;
+    // variable for our array list and context.
+    private ArrayList<ModelItem> menulist;
+    private Context context;
 
     private OnItemClickListener onItemClickListener;
 
-    public AdapterListItem(OnItemClickListener onItemClickListener) {
+
+    public AdapterListOrderPagination(ArrayList<ModelItem> modelItems, Context context,OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
-        menulist = new ArrayList<>();
+        this.menulist = modelItems;
+        this.context = context;
     }
+
 
     @NonNull
     @Override
-    public HolderItemDetail onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HolderItemDetail onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
         return new HolderItemDetail(v);
     }
 
     @Override
-    public void onBindViewHolder(final HolderItemDetail holder, final int position) {
-        final ModelItemPagination menu = menulist.get(position);
+    public void onBindViewHolder(@NonNull HolderItemDetail holder, int position) {
+        final ModelItem menu = menulist.get(position);
         holder.labelnama.setText(menu.getItemname());
         holder.labelkategory.setText("Dalam satuan / " + menu.getItemuom());
         holder.harga.setText(menu.getItempriceview());
@@ -63,7 +67,6 @@ public class AdapterListItem extends RecyclerView.Adapter<HolderItemDetail> {
                 onItemClickListener.onItemClick(menu.getItemid());
             }
         });
-
     }
 
     @Override
@@ -71,14 +74,10 @@ public class AdapterListItem extends RecyclerView.Adapter<HolderItemDetail> {
         return menulist.size();
     }
 
-//    @SuppressLint("NotifyDataSetChanged")
-    public void setData(ArrayList<ModelItemPagination> menulist) {
-//        this.menulist.clear();
-        this.menulist = menulist;
-//        notifyDataSetChanged();
-    }
 
     public interface OnItemClickListener {
         void onItemClick(String idmenu);
     }
+
+
 }
