@@ -64,12 +64,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Judul Makanan"
-                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textColor="@color/basic2"
                             android:textSize="18sp" />
 
 
                         <TextView
                             android:id="@+id/labeldesc"
+                            android:textColor="@color/basic2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center|bottom"
@@ -92,7 +94,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="0"
                                 android:textStyle="bold"
-                                android:textColor="@color/basic2"
+                                android:textColor="@color/basic"
                                 android:textSize="16sp"
                                 android:layout_marginEnd="2dp"/>
                             <TextView
@@ -100,7 +102,7 @@
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
                                 android:text="yang dipesan"
-                                android:textColor="@color/basic2"
+                                android:textColor="@color/basic"
                                 android:textSize="16sp" />
 
                         </LinearLayout>
@@ -138,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:text="Harga"
                         android:textAlignment="textEnd"
-                        android:textColor="@color/black"
+                        android:textColor="@color/basic2"
                         android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>

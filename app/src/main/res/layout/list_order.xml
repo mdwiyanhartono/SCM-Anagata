@@ -48,6 +48,19 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:id="@+id/ispaid"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginStart="10dp"
+                    android:text="tanggal transaksi"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:id="@+id/tgl"
+                    android:maxLength="20"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

@@ -20,14 +20,48 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission
+        android:name="android.permission.POST_NOTIFICATIONS"
+        tools:node="remove" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/scmotwc"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:largeHeap="true"
+        android:roundIcon="@drawable/scmotwc"
         android:supportsRtl="true"
         android:theme="@style/Theme.SCMAnagata">
+        <activity
+            android:name=".Order.ListOrderPagination"
+            android:exported="false" />
+        <activity
+            android:name=".UpdatePassword"
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar" />
+        <activity
+            android:name=".History.SeluruhPesanan"
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar" />
+        <activity
+            android:name=".Payment.TransferManualSigle"
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar" />
+        <activity
+            android:name=".Payment.DetailTransaksiPaySingle"
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar" />
+        <activity
+            android:name=".Payment.InvoiceSingle"
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar" />
+        <activity
+            android:name=".TerimaBarang.TerimaBarangScanQR"
+            android:exported="false" />
+        <activity
+            android:name=".Order.OrderList"
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar" />
         <activity
             android:name=".Order.DetailOrder"
             android:exported="false" />

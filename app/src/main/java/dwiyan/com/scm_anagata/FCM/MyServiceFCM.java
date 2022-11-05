@@ -30,10 +30,12 @@ import dwiyan.com.scm_anagata.Base.GlobalVar;
 import dwiyan.com.scm_anagata.MainActivity;
 import dwiyan.com.scm_anagata.R;
 
+@SuppressLint("MissingFirebaseInstanceTokenRefresh")
 public class MyServiceFCM extends FirebaseMessagingService {
     private static final String TAG = "MyFirebaseMsgService";
     private String chanelId = "chanel_Id";
     private String id = "1";
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // TODO(developer): Handle FCM messages here.
@@ -41,7 +43,7 @@ public class MyServiceFCM extends FirebaseMessagingService {
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         id = remoteMessage.getMessageId();
         // Check if message contains a notification payload.
-        if(remoteMessage.getData().get("to").equals(GlobalVar.ID)){
+        if (Objects.equals(remoteMessage.getData().get("to"), GlobalVar.ID)) {
             showNotification(
                     remoteMessage.getData().get("title"),
                     remoteMessage.getData().get("body"),
@@ -49,10 +51,10 @@ public class MyServiceFCM extends FirebaseMessagingService {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getData().get("body"));
         }
     }
-    // Method to get the custom Design for the display of
-    // notification.
+
+    //     Method to get the custom Design for the display of
     private RemoteViews getCustomDesign(String title,
-                                        String message,String Type) {
+                                        String message, String Type) {
         RemoteViews remoteViews = new RemoteViews(
                 getApplicationContext().getPackageName(),
                 R.layout.notification);
@@ -61,30 +63,32 @@ public class MyServiceFCM extends FirebaseMessagingService {
         switch (Type) {
             case "CHT":
                 remoteViews.setImageViewResource(R.id.icon,
-                        R.drawable.chat_new);
+                        R.drawable.scmotwc);
                 break;
             case "INF":
                 remoteViews.setImageViewResource(R.id.icon,
-                        R.drawable.info);
+                        R.drawable.scmotwc);
                 break;
             case "CNF":
                 remoteViews.setImageViewResource(R.id.icon,
-                        R.drawable.confirm);
+                        R.drawable.scmotwc);
                 break;
             case "PYM":
                 remoteViews.setImageViewResource(R.id.icon,
-                        R.drawable.payment);
+                        R.drawable.scmotwc);
                 break;
             default:
                 remoteViews.setImageViewResource(R.id.icon,
-                        R.drawable.notification);
+                        R.drawable.scmotwc);
                 break;
         }
-//        remoteViews.setImageViewResource(R.id.icon,
-//                R.drawable.notification);
+//                remoteViews.setImageViewResource(R.id.icon,
+//                        R.drawable.notification);
 
         return remoteViews;
     }
+    // notification.
+//
 
     // Method to display the notifications
     @SuppressLint({"ObsoleteSdkInt", "UnspecifiedImmutableFlag"})
@@ -105,8 +109,8 @@ public class MyServiceFCM extends FirebaseMessagingService {
                 = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             pendingIntent = PendingIntent.getActivity(
-            this, 0, intent,
-            PendingIntent.FLAG_IMMUTABLE);
+                    this, 0, intent,
+                    PendingIntent.FLAG_IMMUTABLE);
         } else {
             pendingIntent = PendingIntent.getActivity(
                     this, 0, intent,
@@ -118,8 +122,8 @@ public class MyServiceFCM extends FirebaseMessagingService {
         NotificationCompat.Builder builder
                 = new NotificationCompat
                 .Builder(getApplicationContext(),
-                channel_id+id)
-                .setSmallIcon(R.drawable.notification)
+                channel_id + id)
+                .setSmallIcon(R.drawable.scmotwc)
                 .setAutoCancel(true)
                 .setVibrate(new long[]{1000, 1000, 1000,
                         1000, 1000})
@@ -142,27 +146,27 @@ public class MyServiceFCM extends FirebaseMessagingService {
                 case "CHT":
                     builder = builder.setContentTitle(title)
                             .setContentText(message)
-                            .setSmallIcon(R.drawable.chat_new);
+                            .setSmallIcon(R.drawable.scmotwc);
                     break;
                 case "INF":
                     builder = builder.setContentTitle(title)
                             .setContentText(message)
-                            .setSmallIcon(R.drawable.info);
+                            .setSmallIcon(R.drawable.scmotwc);
                     break;
                 case "CNF":
                     builder = builder.setContentTitle(title)
                             .setContentText(message)
-                            .setSmallIcon(R.drawable.confirm);
+                            .setSmallIcon(R.drawable.scmotwc);
                     break;
                 case "PYM":
                     builder = builder.setContentTitle(title)
                             .setContentText(message)
-                            .setSmallIcon(R.drawable.payment);
+                            .setSmallIcon(R.drawable.scmotwc);
                     break;
                 default:
                     builder = builder.setContentTitle(title)
                             .setContentText(message)
-                            .setSmallIcon(R.drawable.notification);
+                            .setSmallIcon(R.drawable.scmotwc);
                     break;
             }
 
@@ -178,7 +182,7 @@ public class MyServiceFCM extends FirebaseMessagingService {
                 >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel
                     = new NotificationChannel(
-                    channel_id+id, "web_app"+id,
+                    channel_id + id, "web_app" + id,
                     NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(
                     notificationChannel);

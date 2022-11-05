@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginStart="2dp"
+            android:id="@+id/lyitem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_marginEnd="10dp"
+                android:layout_height="match_parent">
+                <androidx.cardview.widget.CardView
+                    app:cardUseCompatPadding="true"
+                    app:cardElevation="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="10dp">
+                    <ImageView
+                        android:background="@drawable/rounded_background"
+                        android:id="@+id/img1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/nodata"/>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="8"
+                android:layout_marginEnd="5dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/lylabel"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:maxLength="50"
+                            android:lines="1"
+                            android:ellipsize="end"
+                            android:id="@+id/judulmakanan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Judul Makanan"
+                            android:textStyle="bold"
+                            android:textColor="@color/basic2"
+                            android:textSize="18sp" />
+
+
+                        <TextView
+                            android:id="@+id/labeldesc"
+                            android:textColor="@color/basic2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center|bottom"
+                            android:text="Description Menu" />
+                        <TextView
+                            android:id="@+id/kategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="10sp" />
+                        <LinearLayout
+                            android:id="@+id/lykeranjang"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/countKeranjang"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textStyle="bold"
+                                android:textColor="@color/basic"
+                                android:textSize="16sp"
+                                android:layout_marginEnd="2dp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:text="yang dipesan"
+                                android:textColor="@color/basic"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+                <!--                <LinearLayout-->
+                <!--                    android:layout_below="@+id/lylabel"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:orientation="horizontal"-->
+                <!--                    android:layout_alignParentBottom="true">-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/lylabel"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:text="Rp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/labelharga"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Harga"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/basic2"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <!--                    <TextView-->
+                <!--                        android:layout_gravity="center|bottom"-->
+                <!--                        android:id="@+id/labeldesc"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="match_parent"-->
+                <!--                        android:text="Description Menu"/>-->
+                <!--                </LinearLayout>-->
+            </RelativeLayout>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/basic2"/>
+    </LinearLayout>
+</LinearLayout>

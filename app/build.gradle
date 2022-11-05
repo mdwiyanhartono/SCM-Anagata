@@ -10,18 +10,34 @@ android {
         applicationId "dwiyan.com.scm_anagata"
         minSdk 21
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 7
+        versionName "1.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // keyalias scm
+    // password scm123456789
+    // scm.jks
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    def appName = "SCM-OTWC"
+                    outputFileName = appName + "-${variant.versionName}.apk"
+                }
+            }
         }
     }
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+//    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -40,6 +56,7 @@ dependencies {
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'androidx.work:work-runtime:2.7.1'
+    implementation 'com.google.android.play:core:1.10.3'
 
 
     testImplementation 'junit:junit:4.13.2'
@@ -60,4 +77,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     // sliderview
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
+    //scanbarcode
+    implementation 'me.dm7.barcodescanner:zxing:1.9.8'
 }

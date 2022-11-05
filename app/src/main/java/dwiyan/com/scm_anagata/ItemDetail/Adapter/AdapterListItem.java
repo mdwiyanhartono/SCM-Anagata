@@ -16,12 +16,13 @@ import java.util.List;
 
 import dwiyan.com.scm_anagata.ItemDetail.Holder.HolderItemDetail;
 import dwiyan.com.scm_anagata.ItemDetail.Model.ModelItem;
+import dwiyan.com.scm_anagata.Order.Model.ModelItemPagination;
 import dwiyan.com.scm_anagata.R;
 
 
 public class AdapterListItem extends RecyclerView.Adapter<HolderItemDetail> {
 
-    private List<ModelItem> menulist;
+    private ArrayList<ModelItemPagination> menulist;
 
     private OnItemClickListener onItemClickListener;
 
@@ -39,7 +40,7 @@ public class AdapterListItem extends RecyclerView.Adapter<HolderItemDetail> {
 
     @Override
     public void onBindViewHolder(final HolderItemDetail holder, final int position) {
-        final ModelItem menu = menulist.get(position);
+        final ModelItemPagination menu = menulist.get(position);
         holder.labelnama.setText(menu.getItemname());
         holder.labelkategory.setText("Dalam satuan / " + menu.getItemuom());
         holder.harga.setText(menu.getItempriceview());
@@ -70,11 +71,11 @@ public class AdapterListItem extends RecyclerView.Adapter<HolderItemDetail> {
         return menulist.size();
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    public void setData(List<ModelItem> menulist) {
-        this.menulist.clear();
+//    @SuppressLint("NotifyDataSetChanged")
+    public void setData(ArrayList<ModelItemPagination> menulist) {
+//        this.menulist.clear();
         this.menulist = menulist;
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     public interface OnItemClickListener {

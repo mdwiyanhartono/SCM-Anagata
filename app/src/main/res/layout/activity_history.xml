@@ -5,9 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/basic"
     tools:context=".History.History">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:background="@color/whitetransparant"
         android:id="@+id/rc1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

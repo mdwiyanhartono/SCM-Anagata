@@ -5,12 +5,22 @@ public class RequestBodyInputTransaksi {
     private String TotalPrice;
     private String PPN;
     private String PPNValue;
+    private String TglDeliv;
 
-    public RequestBodyInputTransaksi(String userId, String totalPrice, String PPN, String PPNValue) {
+    public RequestBodyInputTransaksi(String userId, String totalPrice, String PPN, String PPNValue, String tglDeliv) {
         UserId = userId;
         TotalPrice = totalPrice;
         this.PPN = PPN;
         this.PPNValue = PPNValue;
+        TglDeliv = tglDeliv;
+    }
+
+    public String getTglDeliv() {
+        return TglDeliv;
+    }
+
+    public void setTglDeliv(String tglDeliv) {
+        TglDeliv = tglDeliv;
     }
 
     public String getTotalPrice() {

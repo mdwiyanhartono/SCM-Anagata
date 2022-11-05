@@ -1,7 +1,11 @@
 package dwiyan.com.scm_anagata.ItemDetail;
 
+import static dwiyan.com.scm_anagata.PaginationScrollListener.PAGE_START;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +19,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
@@ -26,6 +31,7 @@ import dwiyan.com.scm_anagata.API.Retroserver;
 import dwiyan.com.scm_anagata.Base.BaseActivity;
 import dwiyan.com.scm_anagata.Base.GlobalVar;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyItem;
+import dwiyan.com.scm_anagata.DataModel.RequestBodyItemPagination;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyUserId;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelProduct;
 import dwiyan.com.scm_anagata.ItemDetail.Adapter.AdapterListItem;
@@ -33,6 +39,8 @@ import dwiyan.com.scm_anagata.ItemDetail.Keranjang.Keranjang;
 import dwiyan.com.scm_anagata.ItemDetail.Model.ModelItem;
 import dwiyan.com.scm_anagata.ItemDetail.ResponseModel.ResponsModelItem;
 import dwiyan.com.scm_anagata.ItemDetail.ResponseModel.ResponsModelKeranjang;
+import dwiyan.com.scm_anagata.Order.Model.ModelItemPagination;
+import dwiyan.com.scm_anagata.Order.OrderList;
 import dwiyan.com.scm_anagata.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,14 +50,19 @@ public class ItemDetailActivity extends BaseActivity implements AdapterListItem.
 
 
     String IdMenu, IdCompany,ProductName,FileContent;
+    NestedScrollView nsc;
+    private boolean isLoading = false;
+    int itemCount = 0;
+    private boolean isLastPage = false;
+    private int currentPage = PAGE_START;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
         Intent i = getIntent();
         IdMenu = i.getStringExtra("IdMenu");
-        ProductName = i.getStringExtra("ProductName");
-        FileContent = i.getStringExtra("FileContent");
+//        ProductName = i.getStringExtra("ProductName");
+//        FileContent = i.getStringExtra("FileContent");
         setUp();
     }
 
@@ -59,12 +72,13 @@ public class ItemDetailActivity extends BaseActivity implements AdapterListItem.
     CardView btnkeranjang;
     TextView labelbtnKeranjang,count;
     AdapterListItem adapterListMenu;
-    private List<ModelItem> menulist = new ArrayList<>();
+    private ArrayList<ModelItemPagination> menulist = new ArrayList<>();
     LinearLayout ly2;
     private void setUp() {
         PdLoading();
 //        collapsing_toolbar = findViewById(R.id.collapsing_toolbar);
         rcmenudetail = findViewById(R.id.rc1);
+        nsc = findViewById(R.id.nsc);
         imagebanner = findViewById(R.id.imagedetail);
         btnkeranjang = findViewById(R.id.btnkeranjang);
         labelbtnKeranjang = findViewById(R.id.labelbtnKeranjang);
@@ -75,16 +89,29 @@ public class ItemDetailActivity extends BaseActivity implements AdapterListItem.
         adapterListMenu = new AdapterListItem(this);
         adapterListMenu.setData(menulist);
         rcmenudetail.setAdapter(adapterListMenu);
-//        collapsing_toolbar.setTitle(ProductName);
-        if(!FileContent.isEmpty()){
-            byte[] decodedString1 = Base64.decode(FileContent, Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString1,0, decodedString1.length);
-            imagebanner.setImageBitmap(decodedByte);
-        }
-
+        nsc.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(@NonNull NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                // on scroll change we are checking when users scroll as bottom.
+                if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                    // in this method we are incrementing page number,
+                    // making progress bar visible and calling get data method.
+                    currentPage++;
+                    PdLoading();
+                    SetupData();
+//                    loadingPB.setVisibility(View.VISIBLE);
+//                    getDataFromAPI(page, limit);
+                }
+            }
+        });
         SetupData();
         cekKeranjang();
-
+//        collapsing_toolbar.setTitle(ProductName);
+//        if(!FileContent.isEmpty()){
+//            byte[] decodedString1 = Base64.decode(FileContent, Base64.DEFAULT);
+//            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString1,0, decodedString1.length);
+//            imagebanner.setImageBitmap(decodedByte);
+//        }
         btnkeranjang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,18 +125,33 @@ public class ItemDetailActivity extends BaseActivity implements AdapterListItem.
 
     private void SetupData() {
 //        PdLoading();
-        menulist.clear();
+//        menulist.clear();
         API();
-        Call<ResponsModelItem> menu = api.GetItem(new RequestBodyItem(IdMenu, GlobalVar.ID));
+        Call<ResponsModelItem> menu = api.GetItemPagination(new RequestBodyItemPagination(IdMenu, GlobalVar.ID, "", String.valueOf(currentPage), String.valueOf(currentPage)));
+//        Call<ResponsModelItem> menu = api.GetItem(new RequestBodyItem(IdMenu, GlobalVar.ID,""));
         menu.enqueue(new Callback<ResponsModelItem>() {
             @Override
             public void onResponse(Call<ResponsModelItem> call, Response<ResponsModelItem> response) {
                 pdLoading.dismiss();
                 Kode = response.body().getKode();
                 Message = response.body().getMessage();
-                menulist = response.body().getResult();
+                for (int i = 0; i < response.body().getResult().size(); i++) {
+                    menulist.add(new ModelItemPagination(
+                            response.body().getResult().get(i).getItemid(),
+                            response.body().getResult().get(i).getCountChart(),
+                            response.body().getResult().get(i).getItemname(),
+                            response.body().getResult().get(i).getItemuom(),
+                            response.body().getResult().get(i).getItemcode(),
+                            response.body().getResult().get(i).getItemdesc(),
+                            response.body().getResult().get(i).getItemprice(),
+                            response.body().getResult().get(i).getItempriceview(),
+                            response.body().getResult().get(i).getImageFileContent(),
+                            response.body().getResult().get(i).getImageFileContent()
+                    ));
+                }
+//                menulist = response.body().getResult();
                 adapterListMenu.setData(menulist);
-//                rcmenudetail.setAdapter(adapterListMenu);
+                rcmenudetail.setAdapter(adapterListMenu);
             }
 
             @Override
@@ -159,7 +201,7 @@ public class ItemDetailActivity extends BaseActivity implements AdapterListItem.
     @Override
     protected void onResume() {
         super.onResume();
-        SetupData();
+//        SetupData();
         cekKeranjang();
     }
 
@@ -169,6 +211,7 @@ public class ItemDetailActivity extends BaseActivity implements AdapterListItem.
         i.putExtra("IDMenu" , idmenu);
         i.putExtra("ActivityID" , "2");
         startActivity(i);
+//        finish();
     }
 
     @Override

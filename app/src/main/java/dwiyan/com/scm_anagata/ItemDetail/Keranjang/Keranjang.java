@@ -6,15 +6,22 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -23,6 +30,7 @@ import dwiyan.com.scm_anagata.Base.BaseActivity;
 import dwiyan.com.scm_anagata.Base.GlobalVar;
 import dwiyan.com.scm_anagata.DataModel.RequestBodyUserId;
 import dwiyan.com.scm_anagata.DataModel.ResponseModelGlobal;
+import dwiyan.com.scm_anagata.History.History;
 import dwiyan.com.scm_anagata.ItemDetail.Keranjang.Adapter.AdapterKeranjang;
 import dwiyan.com.scm_anagata.ItemDetail.Keranjang.Model.ModelKeranjangAll;
 import dwiyan.com.scm_anagata.ItemDetail.Keranjang.Model.RequestBodyInputTransaksi;
@@ -36,8 +44,10 @@ public class Keranjang extends BaseActivity implements AdapterKeranjang.OnItemCl
 
     private List<ModelKeranjangAll> listkeranjang = new ArrayList<>();
     AdapterKeranjang adapterKeranjang;
-    TextView grandtotal,subtotal,ppn;
+    TextView grandtotal,subtotal,ppn,tglKirim;
     Button btnsubmit;
+    String reqdatedelive ;
+
     RecyclerView rc1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,29 +58,44 @@ public class Keranjang extends BaseActivity implements AdapterKeranjang.OnItemCl
         btnsubmit = findViewById(R.id.btnsubmit);
         rc1 = findViewById(R.id.rc1);
         ppn = findViewById(R.id.ppn);
+        tglKirim = findViewById(R.id.tglKirim);
         subtotal = findViewById(R.id.subtotal);
         rc1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rc1.setItemAnimator(new DefaultItemAnimator());
         adapterKeranjang = new AdapterKeranjang(this);
         adapterKeranjang.setData(listkeranjang);
         rc1.setAdapter(adapterKeranjang);
+        reqdatedelive = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        tglKirim.setText(new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()));
         setUpdata();
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btnsubmit.setEnabled(false);
                 SubmitKeranjang();
             }
         });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String date = dayOfMonth + "-" + month + "-" + year;
+                reqdatedelive = year + "-" + month + "-" + dayOfMonth;
+                tglKirim.setText(date);
+            }
+        };
     }
 
     private void SubmitKeranjang() {
+
         SendData();
     }
 
     private void SendData() {
         PdLoading();
         API();
-        Call<ResponseModelGlobal> InputTrans = api.InputTransaksi(new RequestBodyInputTransaksi(GlobalVar.ID,subTotalPrice,PPN,PPNValue));
+        Call<ResponseModelGlobal> InputTrans = api.InputTransaksi(new RequestBodyInputTransaksi(GlobalVar.ID,subTotalPrice,PPN,PPNValue,reqdatedelive));
         InputTrans.enqueue(new Callback<ResponseModelGlobal>() {
             @Override
             public void onResponse(Call<ResponseModelGlobal> call, Response<ResponseModelGlobal> response) {
@@ -82,12 +107,14 @@ public class Keranjang extends BaseActivity implements AdapterKeranjang.OnItemCl
                 } else {
                     DialogNotifFailed("Gagal",Message);
                 }
+                btnsubmit.setEnabled(true);
             }
 
             @Override
             public void onFailure(Call<ResponseModelGlobal> call, Throwable t) {
                 pdLoading.dismiss();
                 DialogNotifError("Error" , t.getMessage());
+                btnsubmit.setEnabled(true);
             }
         });
 
@@ -151,5 +178,20 @@ public class Keranjang extends BaseActivity implements AdapterKeranjang.OnItemCl
     @Override
     public void Detail(String MenuID) {
 
+    }
+
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    public void Tanggal(View view) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dialog = new DatePickerDialog(
+                Keranjang.this,
+                android.R.style.Theme_Holo_Dialog_MinWidth,
+                mDateSetListener,
+                year, month, day);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 }

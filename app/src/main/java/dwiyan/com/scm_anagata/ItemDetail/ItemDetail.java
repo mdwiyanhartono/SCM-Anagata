@@ -33,6 +33,7 @@ import dwiyan.com.scm_anagata.DataModel.ResponseModelGlobal;
 import dwiyan.com.scm_anagata.ItemDetail.Model.ModelItemDetail;
 import dwiyan.com.scm_anagata.ItemDetail.Model.ReqBodyKeranjang;
 import dwiyan.com.scm_anagata.ItemDetail.ResponseModel.ResponsModelItemDetail;
+import dwiyan.com.scm_anagata.Order.OrderList;
 import dwiyan.com.scm_anagata.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -225,8 +226,7 @@ public class ItemDetail extends BaseActivity {
             } else if (Integer.valueOf(ActivityID) == 2) {
                 finish();
             } else {
-                Intent i = new Intent(ItemDetail.this, ItemDetailActivity.class);
-                i.putExtra("CompanyID", CompanyID);
+                Intent i = new Intent(ItemDetail.this, OrderList.class);
                 startActivity(i);
                 finish();
             }
@@ -304,10 +304,10 @@ public class ItemDetail extends BaseActivity {
             finish();
         } else if (Integer.valueOf(ActivityID) == 2) {
             finish();
-        } else {
-//            Intent i = new Intent(DetailMenuService.this, KeranjangService.class);
+        } else if(Integer.valueOf(ActivityID) == 3) {
+            Intent i = new Intent(ItemDetail.this, OrderList.class);
 //            i.putExtra("CompanyID", CompanyID);
-//            startActivity(i);
+            startActivity(i);
             finish();
         }
     }

@@ -11,7 +11,7 @@ import dwiyan.com.scm_anagata.Holder.ItemClickListner;
 import dwiyan.com.scm_anagata.R;
 
 public class HolderListOrder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    public TextView labelnama,Status,ispaid,date,invoice;
+    public TextView labelnama,Status,ispaid,date,invoice,tgl;
     ItemClickListner itemClickListener;
     public LinearLayout lv,lk;
 
@@ -20,6 +20,7 @@ public class HolderListOrder extends RecyclerView.ViewHolder implements View.OnC
         labelnama = itemView.findViewById(R.id.labelTrans);
         Status = itemView.findViewById(R.id.status);
         date = itemView.findViewById(R.id.date);
+        tgl = itemView.findViewById(R.id.tgl);
         invoice = itemView.findViewById(R.id.invoice);
         ispaid = itemView.findViewById(R.id.ispaid);
         lv = itemView.findViewById(R.id.ly1);

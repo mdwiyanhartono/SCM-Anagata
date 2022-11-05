@@ -11,10 +11,6 @@
         android:title="@string/labelfeed"/>
 
     <item
-        android:id="@+id/notif"
-        android:title="@string/labelnotif"
-        android:icon="@drawable/notification"/>
-    <item
         android:id="@+id/account"
         android:title="@string/labelaccount"
         android:icon="@drawable/account"/>

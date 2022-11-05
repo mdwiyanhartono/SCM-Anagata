@@ -32,6 +32,7 @@ import dwiyan.com.scm_anagata.API.Retroserver;
 import dwiyan.com.scm_anagata.DataBase.DBAdapter2;
 import dwiyan.com.scm_anagata.MainActivity;
 import dwiyan.com.scm_anagata.R;
+import dwiyan.com.scm_anagata.SplashScreen;
 
 public class BaseFragment extends Fragment {
 
@@ -71,8 +72,8 @@ public class BaseFragment extends Fragment {
             GlobalVar.NAMA = c.getString(0);
             GlobalVar.EMAIL = c.getString(2);
             GlobalVar.ID = c.getString(3);
-            GlobalVar.NOHP = c.getString(4);
-            GlobalVar.Level = c.getString(5);
+//            GlobalVar.NOHP = c.getString(4);
+//            GlobalVar.Level = c.getString(5);
         }
         db.close();
     }
@@ -257,15 +258,18 @@ public class BaseFragment extends Fragment {
 
         }
     }
-    private void logout() {
-//        DBAdapter2 db2 = new DBAdapter2(getActivity());
-//        //OPEN
-//        db2.openDB();
-//        //SELECT
-//        Long a = db2.Deleteuser();
-//        db2.close();
-//        Intent i = new Intent(getActivity(), SplashScreen.class);
-//        startActivity(i);
-//        getActivity().finish();
+    public void logout() {
+        DBAdapter2 db2 = new DBAdapter2(getActivity());
+        //OPEN
+        db2.openDB();
+        //SELECT
+        Long a = db2.Deleteuser();
+        db2.close();
+        GlobalVar.ID = "0";
+        Intent i = new Intent(getActivity(), SplashScreen.class);
+        startActivity(i);
+        getActivity().finish();
+
+        GlobalVar globalVar = new GlobalVar();
     }
 }
