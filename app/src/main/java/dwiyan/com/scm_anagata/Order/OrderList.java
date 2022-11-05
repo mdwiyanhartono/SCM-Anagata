@@ -18,6 +18,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +64,7 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
     String sCari = null;
     LinearLayout ly2;
     NestedScrollView nsc;
+    ProgressBar loadingPB;
     private boolean isLoading = false;
     int itemCount = 0;
     private boolean isLastPage = false;
@@ -72,6 +74,7 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list);
+        loadingPB = findViewById(R.id.idPBLoading);
         rc1 = findViewById(R.id.rc1);
         nsc = findViewById(R.id.nsc);
         rcmenudetail = findViewById(R.id.rc2);
@@ -85,7 +88,7 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
         rc1.setItemAnimator(new DefaultItemAnimator());
         rc1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         adapterItemCategory = new AdapterCategory(this);
-
+        loadingPB.setVisibility(View.GONE);
         rcmenudetail.setLayoutManager(layoutManager);
         rcmenudetail.setItemAnimator(new DefaultItemAnimator());
         nsc.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
@@ -96,9 +99,10 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
                     // in this method we are incrementing page number,
                     // making progress bar visible and calling get data method.
                     currentPage++;
-                    PdLoading();
+//                    PdLoading();
+                    loadingPB.setVisibility(View.VISIBLE);
                     GetMenu(Categid);
-                    Toast.makeText(OrderList.this, "Load More Page" + currentPage, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(OrderList.this, "Load More Page" + currentPage, Toast.LENGTH_SHORT).show();
 //                    loadingPB.setVisibility(View.VISIBLE);
 //                    getDataFromAPI(page, limit);
                 }
@@ -268,11 +272,12 @@ public class OrderList extends BaseActivity implements UpdateRC, AdapterListItem
                     ));
 
                     itemCount++;
-                    Toast.makeText(OrderList.this, "Count " + itemCount, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(OrderList.this, "Count " + itemCount, Toast.LENGTH_SHORT).show();
                 }
 //                menulist = response.body().getResult();
                 adapterListMenu.setData(menulist);
                 rcmenudetail.setAdapter(adapterListMenu);
+                loadingPB.setVisibility(View.GONE);
 //                itemCount = menulist.size() + itemCount;
 //                Toast.makeText(OrderList.this, "Count " + itemCount, Toast.LENGTH_SHORT).show();
 //                rcmenudetail.setAdapter(adapterListMenu);
